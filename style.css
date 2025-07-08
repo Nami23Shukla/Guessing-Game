@@ -1,0 +1,147 @@
+/* ====================================
+   Number Guessing Game – Pastel Theme
+   ==================================== */
+
+/* 1.  Design Tokens & Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+:root {
+  /* Pastel Gradient Background */
+  --clr-bg-start: #f8e8ff;   /* soft lavender */
+  --clr-bg-end:   #dff9ff;   /* powder blue */
+
+  /* Glass Card */
+  --clr-card:       rgba(255, 255, 255, 0.28);
+  --clr-glass-edge: rgba(255, 255, 255, 0.5);
+
+  /* Accent & Text */
+  --clr-accent:      #ffc8dd;   /* blush pink */
+  --clr-accent-dark: #f8a7c5;   /* deeper blush for kbd / hover */
+  --clr-text-main:   #3c3c3c;   /* soft charcoal */
+  --clr-text-sub:    rgba(60, 60, 60, 0.7);
+
+  /* Misc */
+  --radius-lg: 1.75rem;
+  --radius-sm: 0.5rem;
+  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.18);
+  --time-fast: 200ms;
+}
+
+/* 2. Reset & Global */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  font-family: "Poppins", system-ui, sans-serif;
+  background: linear-gradient(135deg, var(--clr-bg-start), var(--clr-bg-end));
+  color: var(--clr-text-main);
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+/* 3. Container Card */
+.container {
+  backdrop-filter: blur(16px) saturate(180%);
+  background: var(--clr-card);
+  border: 1px solid var(--clr-glass-edge);
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 6vw, 3.25rem);
+  width: min(92vw, 460px);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  animation: fadeInUp var(--time-fast) ease-out;
+}
+
+/* 4. Typography */
+.title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+  font-weight: 600;
+}
+
+.note {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--clr-text-sub);
+}
+
+kbd {
+  background: var(--clr-accent-dark);
+  padding: 0 0.55rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+/* 5. Button */
+.btn {
+  --btn-shadow: 0 0 18px var(--clr-accent);
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #3c3c3c;
+  background: var(--clr-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: transform var(--time-fast) ease, box-shadow var(--time-fast) ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: var(--btn-shadow);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: none;
+}
+
+/* 6. Result Output */
+.result {
+  margin-top: 1.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  min-height: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result--success {
+  color: #8ac926;   /* pastel green highlight */
+  animation: pop var(--time-fast) ease-out;
+}
+
+.result--info,
+.result--quit {
+  color: #ffafcc;   /* soft salmon hint */
+  animation: pop var(--time-fast) ease-out;
+}
+
+/* 7. Keyframes */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pop {
+  0%   { transform: scale(0.9); }
+  60%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* 8. Mobile Tweaks */
+@media (max-width: 380px) {
+  .btn { width: 100%; }
+}
